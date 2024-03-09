@@ -11,7 +11,7 @@ export interface Journey {
 export interface POI {
     name: string,
     addressLine?: string,
-    postalCode?: number,
+    postalCode?: string | null,
     postalPlace?: string,
     phone?: string,
     email?: string,

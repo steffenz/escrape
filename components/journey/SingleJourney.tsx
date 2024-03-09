@@ -77,7 +77,7 @@ export default function SingleJourney({ journey }: Props){
         <div className="flex gap-2">
           <Button variant="outline" asChild>
             <Link target="_blank" href="https://www.hertzfreerider.no/unauth/list_transport_offer.aspx">
-            <ExternalLink className="mr-2 h-4 w-4" />Book via Hertz</Link>
+            <ExternalLink className="mr-2 h-4 w-4" />Book via { journey.provider}</Link>
           </Button>
           <Button variant="outline" onClick={toggleItem}>
             { isHidden ? <><EyeIcon className="mr-2 h-4 w-4" />Vis</> : <><EyeOffIcon className="mr-2 h-4 w-4" />Skjul</> }
