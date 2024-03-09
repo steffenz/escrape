@@ -1,4 +1,4 @@
-import { getProviders } from '../api';
+// import { getProviders } from '../api';
 
 export const 
     dynamic = 'auto',
@@ -9,9 +9,9 @@ export const
     preferredRegion = 'auto'
 
 export default async function Page(){
-    const providers = await getProviders('providers-cached');
+    // const providers = await getProviders('providers-cached');
 
-    console.log(providers);
+    // console.log(providers);
     return(<h1>Hello World</h1>);
 }
 

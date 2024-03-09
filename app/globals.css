@@ -74,3 +74,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+.no-hidden .hiddenItem {
+  display: none;
+}
+.hiddenItem {
+  opacity: 0.5;
+}
