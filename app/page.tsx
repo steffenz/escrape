@@ -1,4 +1,3 @@
-import SettingsPanel from "@/components/settings/SettingsPanel";
 import JourniesList from "@/components/journey/JourniesList";
 import getJournies from "./api/journies/providers";
 import Link from "next/link";
@@ -12,7 +11,6 @@ export default async function Home() {
         <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
           Returbiler tilgjengelig 
         </h1>
-        <SettingsPanel />
       </header>
       
       <JourniesList journies={journies} />
