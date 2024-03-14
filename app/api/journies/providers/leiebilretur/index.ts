@@ -1,6 +1,7 @@
 import { Journey } from "@/types";
 import sha256 from "crypto-js/sha256";
 import { LeibilreturJourney } from "./types";
+import { parseISO } from "date-fns";
 
 export default async function getJournies(): Promise<Journey[]> {
   const req = await fetch("https://leiebilretur.no/headless/jobs/");
@@ -14,7 +15,7 @@ const transform = (journies: LeibilreturJourney[]): Journey[] =>
         {
             id: sha256(JSON.stringify(j)).toString(),
             provider: "Leiebilretur",
-            availableFrom: j.availableForPickup,
+            availableFrom: parseISO(j.availableForPickup),
             carDescription: j.regNumber,
             pickupPoint: {
                 name: j.pickupFrom.name,

@@ -1,7 +1,7 @@
 "use client";
 import { Journey } from "@/types";
 import { Button } from "@/components/ui/button"
-import { ExternalLink, MapPinIcon, EyeOffIcon, EyeIcon } from "lucide-react"
+import { ExternalLink, MapPinIcon, EyeOffIcon, EyeIcon, ClockIcon } from "lucide-react"
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import {
 import Link from "next/link"
 import { useState } from "react";
 import { useSettings } from "../context/SettingsContext";
+import { format } from "date-fns";
 
 
 interface Props {
@@ -70,8 +71,18 @@ export default function SingleJourney({ journey }: Props){
           <MapPinIcon size="16" className="mr-2"/>
           <span className="capitalize">{journey.returnPoint.name }</span>
         </span>
-          <p>{journey.availableFrom} - { journey.availableTo } </p>
-          
+        { journey.availableFrom && 
+        <span className="flex items-center">
+          <ClockIcon size="16" className="mr-2"/>
+          <span>{format(journey.availableFrom, "dd.MM.yyyy")}</span>
+        </span>
+        }
+        { journey.availableTo && 
+        <span className="flex items-center">
+          <ClockIcon size="16" className="mr-2"/>
+          <span>{format(journey.availableTo, "dd.MM.yyyy")}</span>
+        </span>
+        }
         </CardContent>
         <CardFooter>
         <div className="flex gap-2">

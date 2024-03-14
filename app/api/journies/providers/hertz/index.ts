@@ -2,6 +2,7 @@
 import { Journey } from '@/types';
 import { CarRental } from './types';
 import sha256 from 'crypto-js/sha256';
+import { parseISO } from 'date-fns';
 
 export default async function getJournies(): Promise<Journey[]>{
     const req = await fetch("https://www.hertzfreerider.no/api/transport-routes/?country=NORWAY");
@@ -15,8 +16,8 @@ const transform = (journies: CarRental[]): Journey[] =>
         {
             id: sha256(JSON.stringify(j)).toString(),
             provider: "Hertz",
-            availableFrom: j.routes[0].availableAt,
-            availableTo: j.routes[0].latestReturn,
+            availableFrom: parseISO(j.routes[0].availableAt),
+            availableTo: parseISO(j.routes[0].latestReturn),
             carDescription: j.routes[0].carModel,
             pickupPoint: {
                 name: j.pickupLocationName.toLocaleLowerCase(),

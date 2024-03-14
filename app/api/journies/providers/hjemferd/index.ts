@@ -1,12 +1,21 @@
 import { Journey } from '@/types';
 const cheerio = require('cheerio');
 import sha256 from 'crypto-js/sha256';
+import { parse } from 'date-fns';
 
 
 export default async function getJournies(): Promise<Journey[]>{
     const req = await fetch("https://hjemferd.no/index.php?page=order");
     const journies = await scrapeItems(req);
     return journies;
+}
+
+const parseDate = (date: string): Date => {
+    // Sometimes they mess up the date with tabs and specific hours we don't need atm.
+    const dateRegex = /\b\d{1,2}\.\d{1,2}\.\d{4}\b/;
+    const dateMatch = date.match(dateRegex);
+    const cleanedDate = dateMatch ? dateMatch[0] : "";
+    return parse(cleanedDate, 'dd.MM.yyyy', new Date());
 }
 
 
@@ -23,8 +32,8 @@ const scrapeItems = async (response: Response) => {
         journies.push({
             id: sha256(JSON.stringify([header, startDate, pickupBy])).toString(),
             provider: "Hjemferd",
-            availableFrom: startDate,
-            availableTo: pickupBy,
+            availableFrom: parseDate(startDate),
+            availableTo: parseDate(pickupBy),
             carDescription: "",
             pickupPoint: {
                 name: header[0]?.toLocaleLowerCase(),
