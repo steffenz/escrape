@@ -10,23 +10,35 @@ export default async function getJournies(): Promise<Journey[]> {
   return journies;
 }
 
-const transform = (journies: LeibilreturJourney[]): Journey[] => 
-    journies.map(j => (
-        {
-            id: sha256(JSON.stringify(j)).toString(),
-            provider: "Leiebilretur",
-            availableFrom: parseISO(j.availableForPickup),
-            carDescription: j.regNumber,
-            pickupPoint: {
-                name: j.pickupFrom.name.toLocaleLowerCase(),
-                addressLine: j.pickupFrom.line1,
-                postalPlace: j.pickupFrom.city,
-                postalCode: j.pickupFrom.postCode,
-            },
-            returnPoint: {
-                name: j.deliverTo.name.toLocaleLowerCase(),
-                addressLine: j.deliverTo.line1,
-                postalPlace: j.deliverTo.city,
-                postalCode: j.deliverTo.postCode,
-            }
-    }), []);
+const transform = (journies: LeibilreturJourney[]): Journey[] => {
+
+    const items: Journey[] = [];
+
+    journies.forEach(j => {
+        const { name } = j.pickupFrom;
+        if(name !== "Test 96" && name !== "Test 23456"){
+            items.push(
+                {
+                    id: sha256(JSON.stringify(j)).toString(),
+                    provider: "Leiebilretur",
+                    availableFrom: parseISO(j.availableForPickup),
+                    carDescription: j.regNumber,
+                    pickupPoint: {
+                        name: j.pickupFrom.name.toLocaleLowerCase(),
+                        addressLine: j.pickupFrom.line1,
+                        postalPlace: j.pickupFrom.city,
+                        postalCode: j.pickupFrom.postCode,
+                    },
+                    returnPoint: {
+                        name: j.deliverTo.name.toLocaleLowerCase(),
+                        addressLine: j.deliverTo.line1,
+                        postalPlace: j.deliverTo.city,
+                        postalCode: j.deliverTo.postCode,
+                    }
+            })
+            
+        }
+        
+    });
+    return items;
+}
