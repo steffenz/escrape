@@ -3,6 +3,8 @@ const cheerio = require('cheerio');
 import sha256 from 'crypto-js/sha256';
 import { parse } from 'date-fns';
 
+const baseBookingUrl = 'https://hjemferd.no/index.php?page=order'
+
 
 export default async function getJournies(): Promise<Journey[]>{
     const req = await fetch("https://hjemferd.no/index.php?page=order");
@@ -32,6 +34,7 @@ const scrapeItems = async (response: Response) => {
         journies.push({
             id: sha256(JSON.stringify([header, startDate, pickupBy])).toString(),
             provider: "Hjemferd",
+            bookingUrl: baseBookingUrl,
             availableFrom: parseDate(startDate),
             availableTo: parseDate(pickupBy),
             carDescription: "",

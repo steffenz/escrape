@@ -87,7 +87,7 @@ export default function SingleJourney({ journey }: Props){
         <CardFooter>
         <div className="flex gap-2">
           <Button variant="outline" asChild>
-            <Link target="_blank" href="https://www.hertzfreerider.no/unauth/list_transport_offer.aspx">
+            <Link target="_blank" href={journey.bookingUrl ? journey.bookingUrl : ""}>
             <ExternalLink className="mr-2 h-4 w-4" />Book via { journey.provider}</Link>
           </Button>
           <Button variant="outline" onClick={toggleItem}>

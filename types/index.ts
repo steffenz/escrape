@@ -1,6 +1,7 @@
 export interface Journey {
     id: string
     provider: string,
+    bookingUrl?: string,
     availableFrom?: Date,
     availableTo?: Date,
     carDescription: string
