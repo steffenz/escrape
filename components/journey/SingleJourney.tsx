@@ -1,14 +1,12 @@
 "use client";
 import { Journey } from "@/types";
 import { Button } from "@/components/ui/button"
-import { ExternalLink, MapPinIcon, EyeOffIcon, EyeIcon, ClockIcon } from "lucide-react"
+import { ExternalLink, MapPinIcon, EyeOffIcon, EyeIcon, ClockIcon,RouteIcon, RouteOffIcon } from "lucide-react"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import Link from "next/link"
 import { useState } from "react";
@@ -64,23 +62,18 @@ export default function SingleJourney({ journey }: Props){
         <CardContent>
 
         <span className="flex items-center">
-          <MapPinIcon size="16" className="mr-2"/> 
+          <RouteIcon size="16" className="mr-2"/> 
           <span className="capitalize">{journey.pickupPoint.name }</span>
         </span>
         <span className="flex items-center">
-          <MapPinIcon size="16" className="mr-2"/>
+          <RouteOffIcon size="16" className="mr-2"/>
           <span className="capitalize">{journey.returnPoint.name }</span>
         </span>
         { journey.availableFrom && 
         <span className="flex items-center">
           <ClockIcon size="16" className="mr-2"/>
           <span>{format(journey.availableFrom, "dd.MM.yyyy")}</span>
-        </span>
-        }
-        { journey.availableTo && 
-        <span className="flex items-center">
-          <ClockIcon size="16" className="mr-2"/>
-          <span>{format(journey.availableTo, "dd.MM.yyyy")}</span>
+          { journey.availableTo && <span className="mx-2"> - { format(journey.availableTo, "dd.MM.yyyy")}</span>}
         </span>
         }
         </CardContent>
