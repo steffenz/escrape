@@ -12,7 +12,6 @@ export default function SettingsPanel(){
     return(
     <>
         <Button onClick={() => setShowHidden(!showHidden)}>{ showHidden ? 'Ikke vis skjulte': 'Vis skjulte'}</Button>
-        <br/><br/>
     </>
     )
 }
