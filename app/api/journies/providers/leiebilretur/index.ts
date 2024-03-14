@@ -18,13 +18,13 @@ const transform = (journies: LeibilreturJourney[]): Journey[] =>
             availableFrom: parseISO(j.availableForPickup),
             carDescription: j.regNumber,
             pickupPoint: {
-                name: j.pickupFrom.name,
+                name: j.pickupFrom.name.toLocaleLowerCase(),
                 addressLine: j.pickupFrom.line1,
                 postalPlace: j.pickupFrom.city,
                 postalCode: j.pickupFrom.postCode,
             },
             returnPoint: {
-                name: j.deliverTo.name,
+                name: j.deliverTo.name.toLocaleLowerCase(),
                 addressLine: j.deliverTo.line1,
                 postalPlace: j.deliverTo.city,
                 postalCode: j.deliverTo.postCode,
