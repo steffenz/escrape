@@ -27,10 +27,10 @@ const scrapeItems = async (response: Response) => {
             availableTo: pickupBy,
             carDescription: "",
             pickupPoint: {
-                name: header[0],
+                name: header[0]?.toLocaleLowerCase(),
             },
             returnPoint: {
-                name: header[1],
+                name: header[1]?.toLocaleLowerCase(),
             }
         }
     )}); 

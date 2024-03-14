@@ -19,14 +19,14 @@ const transform = (journies: CarRental[]): Journey[] =>
             availableTo: j.routes[0].latestReturn,
             carDescription: j.routes[0].carModel,
             pickupPoint: {
-                name: j.pickupLocationName,
+                name: j.pickupLocationName.toLocaleLowerCase(),
                 addressLine: j.routes[0].pickupLocation.address,
                 postalPlace: j.routes[0].pickupLocation.city,
                 phone: j.routes[0].pickupLocation.phoneNumber,
                 email: j.routes[0].pickupLocation.emailAddress,
             },
             returnPoint: {
-                name: j.returnLocationName,
+                name: j.returnLocationName.toLocaleLowerCase(),
                 addressLine: j.routes[0].returnLocation.address,
                 postalPlace: j.routes[0].returnLocation.city,
                 phone: j.routes[0].returnLocation.phoneNumber,

@@ -59,16 +59,16 @@ export default function SingleJourney({ journey }: Props){
     return(
       <Card className={isHidden ? 'hiddenItem' :''}>
         <CardHeader>
-          {/* <CardTitle>Card Title</CardTitle> */}
-          {/* <CardDescription>Gratisreis</CardDescription> */}
         </CardHeader>
         <CardContent>
 
         <span className="flex items-center">
-          <MapPinIcon size="16" className="mr-2"/> { journey.pickupPoint.name }
+          <MapPinIcon size="16" className="mr-2"/> 
+          <span className="capitalize">{journey.pickupPoint.name }</span>
         </span>
         <span className="flex items-center">
-          <MapPinIcon size="16" className="mr-2"/> { journey.returnPoint.name }
+          <MapPinIcon size="16" className="mr-2"/>
+          <span className="capitalize">{journey.returnPoint.name }</span>
         </span>
           <p>{journey.availableFrom} - { journey.availableTo } </p>
           
