@@ -1,3 +1,4 @@
+import { getRevalidationInterval } from '@/lib/utils';
 import { Journey } from '@/types';
 const cheerio = require('cheerio');
 import sha256 from 'crypto-js/sha256';
@@ -7,7 +8,7 @@ const baseBookingUrl = 'https://hjemferd.no/index.php?page=order'
 
 
 export default async function getJournies(): Promise<Journey[]>{
-    const req = await fetch("https://hjemferd.no/index.php?page=order");
+    const req = await fetch("https://hjemferd.no/index.php?page=order", { next: { revalidate: getRevalidationInterval()}});
     const journies = await scrapeItems(req);
     return journies;
 }

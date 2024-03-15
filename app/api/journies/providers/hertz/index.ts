@@ -3,11 +3,12 @@ import { Journey } from '@/types';
 import { CarRental } from './types';
 import sha256 from 'crypto-js/sha256';
 import { parseISO } from 'date-fns';
+import { getRevalidationInterval } from '@/lib/utils';
 
 const baseBookingUrl = 'https://www.hertzfreerider.no/no-no/';
 
 export default async function getJournies(): Promise<Journey[]>{
-    const req = await fetch("https://www.hertzfreerider.no/api/transport-routes/?country=NORWAY");
+    const req = await fetch("https://www.hertzfreerider.no/api/transport-routes/?country=NORWAY", { next: { revalidate: getRevalidationInterval() } });
     const apiResponse = await req.json();
     const journies = transform(apiResponse);
     return journies;

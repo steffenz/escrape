@@ -2,11 +2,12 @@ import { Journey } from "@/types";
 import sha256 from "crypto-js/sha256";
 import { LeibilreturJourney } from "./types";
 import { parseISO } from "date-fns";
+import { getRevalidationInterval } from "@/lib/utils";
 
 const baseBookingUrl = 'https://leiebilretur.no/'
 
 export default async function getJournies(): Promise<Journey[]> {
-  const req = await fetch("https://leiebilretur.no/headless/jobs/");
+  const req = await fetch("https://leiebilretur.no/headless/jobs/", { next: { revalidate: getRevalidationInterval() } });
   const apiResponse = await req.json();
   const journies = transform(apiResponse);
   return journies;
